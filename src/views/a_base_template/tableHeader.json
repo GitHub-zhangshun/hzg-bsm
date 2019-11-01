@@ -1,0 +1,60 @@
+{
+  para: 'name',
+  text: '姓名',
+  type: 'text'
+}
+{
+  para: 'openTime',
+  text: '开始时间|结束时间',
+  type: 'times',
+  details: {
+    type: 'daterange',
+    parse: ['openStartTime', 'openEndTime']
+  }
+}
+{
+  para: 'isOpen',
+  text: '存管开户',
+  type: 'bool_enum',
+  details: {
+    parse: ['已开户', '未开户']
+  }
+}
+{
+  para: 'type',
+  text: '订单状态',
+  type: 'sys_enum',
+  details: {
+    type: 'typeEnum',
+    path: 'fin_capital_type',
+    show: this.$route.meta.type === 'borrower' ? ['borrower', 'share'] : ['lender', 'share']
+  }
+}
+{
+  para: 'templateType',
+  text: '模板',
+  type: 'custom_enum',
+  details: {
+    parse: [{
+      label: '验证类',
+      value: '1'
+    }, {
+      label: '通知类',
+      value: '2'
+    }, {
+      label: '营销类',
+      value: '3'
+    }, {
+      label: '综合类',
+      value: '4'
+    }]
+  }
+}
+{
+  para: 'providerId',
+  text: '助贷机构',
+  type: 'fuzzy_provider'
+}
+<TableListHeader @updateData="getList()" @topAction="top_execute" v-if="currentMenuTopRunFuncList && currentMenuTopRunFuncList.length > 0"  v-model="searchForm" :searchItems="searchItems" @change="getList()">
+
+      </TableListHeader>
